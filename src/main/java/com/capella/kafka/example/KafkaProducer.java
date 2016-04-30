@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.example;
 
 /**
  * Created by ramesh on 29/04/2016.

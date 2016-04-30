@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.embedded;
 
 import org.apache.zookeeper.server.NIOServerCnxnFactory;
 import org.apache.zookeeper.server.ServerCnxnFactory;
@@ -32,18 +32,18 @@ public class ZookeeperEmbeddedServer {
 
     private int resolvePort(int port) {
         if (port == -1) {
-            return TestUtils.getAvailablePort();
+            return FileHelper.getAvailablePort();
         }
         return port;
     }
 
     public void startup() throws IOException {
         if (this.port == -1) {
-            this.port = TestUtils.getAvailablePort();
+            this.port = FileHelper.getAvailablePort();
         }
         this.factory = NIOServerCnxnFactory.createFactory(new InetSocketAddress("localhost", port), 1024);
-        this.snapshotDir = TestUtils.constructTempDir("embeeded-zk/snapshot");
-        this.logDir = TestUtils.constructTempDir("embeeded-zk/log");
+        this.snapshotDir = FileHelper.constructTempDir("embeeded-zk/snapshot");
+        this.logDir = FileHelper.constructTempDir("embeeded-zk/log");
 
         try {
             factory.startup(new ZooKeeperServer(snapshotDir, logDir, tickTime));
@@ -56,12 +56,12 @@ public class ZookeeperEmbeddedServer {
     public void shutdown() {
         factory.shutdown();
         try {
-            TestUtils.deleteFile(snapshotDir);
+            FileHelper.deleteFile(snapshotDir);
         } catch (FileNotFoundException e) {
             // ignore
         }
         try {
-            TestUtils.deleteFile(logDir);
+            FileHelper.deleteFile(logDir);
         } catch (FileNotFoundException e) {
             // ignore
         }

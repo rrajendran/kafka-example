@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.embedded;
 
 import kafka.utils.Time;
 

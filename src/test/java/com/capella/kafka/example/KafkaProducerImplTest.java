@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.example;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -15,8 +15,6 @@ public class KafkaProducerImplTest extends KafkaServerBaseTest {
     @Test
     public void test() throws IOException, InterruptedException {
         kafkaProducer.send(RandomStringUtils.randomAlphanumeric(20));
-
-
     }
 
 }

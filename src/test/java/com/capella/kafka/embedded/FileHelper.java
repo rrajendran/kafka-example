@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.embedded;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Random;
 
-class TestUtils {
+public class FileHelper {
     private static final Random RANDOM = new Random();
 
-    private TestUtils() {
+    private FileHelper() {
     }
 
     public static File constructTempDir(String dirPrefix) {

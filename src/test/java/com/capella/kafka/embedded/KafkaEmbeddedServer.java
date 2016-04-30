@@ -1,4 +1,4 @@
-package com.capella;
+package com.capella.kafka.embedded;
 
 import kafka.server.KafkaConfig;
 import kafka.server.KafkaServer;
@@ -51,7 +51,7 @@ public class KafkaEmbeddedServer {
 
     private int resolvePort(int port) {
         if (port == -1) {
-            return TestUtils.getAvailablePort();
+            return FileHelper.getAvailablePort();
         }
         return port;
     }
@@ -70,8 +70,7 @@ public class KafkaEmbeddedServer {
     public void startup() {
         for (int i = 0; i < ports.size(); i++) {
             Integer port = ports.get(i);
-            File logDir = TestUtils.constructTempDir("kafka-local");
-
+            File logDir = FileHelper.constructTempDir("kafka-local");
             Properties properties = new Properties();
             properties.putAll(baseProperties);
             properties.setProperty("zookeeper.connect", zkConnection);
@@ -126,7 +125,7 @@ public class KafkaEmbeddedServer {
         }
         for (File logDir : logDirs) {
             try {
-                TestUtils.deleteFile(logDir);
+                FileHelper.deleteFile(logDir);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

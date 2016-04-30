@@ -1,29 +1,20 @@
-package com.capella;
+package com.capella.kafka.example;
 
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Properties;
 
 /**
  * Hello world!
  */
 public class KafkaProducerImpl implements KafkaProducer {
     public static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(KafkaProducerImpl.class);
-    private Properties properties = new Properties();
-    ProducerConfig producerConfig;
-    {
-        try {
-            properties.load(KafkaProducerImpl.class.getClassLoader().getResourceAsStream("kafka.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private ProducerConfig producerConfig;
+
 
     public KafkaProducerImpl() {
-        producerConfig = new ProducerConfig(properties);
+        producerConfig = new ProducerConfig(PropertiesHelper.getInstance().getProperties());
     }
 
     public void send(String message) {
